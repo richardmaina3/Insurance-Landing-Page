@@ -1,7 +1,12 @@
+export type ServiceIcon = 'corporate' | 'personal' | 'shield';
+
 export interface ServiceItem {
   title: string;
   description: string;
-  icon: 'corporate' | 'personal';
+  // Any icon key defined in Services.astro's icon registry.
+  // Unrecognized keys fall back to a generic "shield" icon, so a new
+  // service can be added here even before a bespoke icon exists for it.
+  icon: ServiceIcon;
 }
 
 export const services: ServiceItem[] = [

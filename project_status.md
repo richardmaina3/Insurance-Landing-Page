@@ -13,12 +13,19 @@ Phase 1 (v1): a functional, shareable one-page site — Hero, Services (corporat
 - Automated docs created: `Architecture.md`, `Changelog.md`, `project_status.md`.
 - Plugins installed: `frontend-design`, `feature-dev`. MCP-related plugins installed: `playwright`, `netlify-skills`.
 - Permissions drafted and confirmed; written to `.claude/settings.local.json`.
-- Visual direction chosen: "Modern Advisor" (indigo/navy + mint accent, Space Grotesk + IBM Plex Sans, bold asymmetric hero, dark contact section) — selected from a 3-direction mockup comparison against Directions A ("Global Trust") and C ("Warm Personal"). See `CLAUDE.md` Key Design Decisions.
+- Visual direction chosen: "Modern Advisor" (indigo/navy + mint accent, Space Grotesk + IBM Plex Sans, dark contact section) — selected from a 3-direction mockup comparison against Directions A ("Global Trust") and C ("Warm Personal"). See `CLAUDE.md` Key Design Decisions.
+- Full Astro site scaffolded (Nav, Hero, Services, About, Testimonials, Contact, Footer); upgraded to Astro 7 + Tailwind v4 (0 known vulnerabilities) after the initial Astro 4.x pin was flagged by `npm audit`.
+- Node/npm run via Docker (`node:24-slim`) on this machine — no native Node install; see `CLAUDE.md` Frequently Used Commands.
+- Captured "peace of mind" as a core brand principle (stakeholder input) in `product_requirements.md` and `CLAUDE.md`.
+- Hero redesigned as a full-width photo banner (tree-lined driveway image + indigo gradient overlay), replacing the earlier side-by-side portrait layout; professional headshot now lives in the About section only.
+- Services section generalized (auto-fit grid, icon registry with a fallback icon) so a 3rd/4th service is a content-only edit to `src/content/services.ts` — real content pending stakeholder discussion.
+- Real hero and headshot images wired in. **Hero image is a placeholder pending a licensed/final asset — do not deploy live as-is.**
 
 ## Next up
-- Scaffold the Astro project per the directory structure in `CLAUDE.md` / `engineering_design.md` §10, applying the "Modern Advisor" visual direction.
-- Build out each section (Nav, Hero, Services, About, Testimonials, Contact, Footer) with placeholder content where real content isn't available yet.
-- Wire up Netlify Forms (form markup + dashboard email notification) and test end-to-end submission.
+- Get the 3rd/4th service content from the client and add to `src/content/services.ts`.
+- Resolve licensing for the hero image (or swap in an owned/licensed replacement) before any live deploy.
+- Fill in real bio, credentials, and testimonials as they become available.
+- Wire up Netlify Forms notification in the Netlify dashboard and test end-to-end submission live (Netlify Forms only captures submissions once deployed, not in local dev).
 - Deploy and verify on Netlify's default subdomain; cross-browser/responsive check per engineering_design.md §11.
 
 ## Deferred

@@ -29,8 +29,10 @@ const { name } = Astro.props;
       </div>
     </div>
 
-    <div class="flex h-[380px] w-full max-w-[320px] flex-1 items-center justify-center rounded-[20px] border border-line bg-white text-sm text-ink-soft">
-      {name}'s photo
-    </div>
+    <img
+      src="/images/professional_headshot.jpg"
+      alt={`Portrait of ${name}`}
+      class="h-[380px] w-full max-w-[320px] flex-1 rounded-[20px] border border-line bg-white object-cover object-top"
+    />
   </div>
 </section>

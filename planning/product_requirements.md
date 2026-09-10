@@ -5,6 +5,8 @@
 - **What problem does it solve?** Prospective clients currently have no single, shareable place online to learn who this person is, what they offer, and how to get in touch. The site acts as the professional's primary point of contact and credibility signal.
 - **What does the product do?** A single-page website that introduces the professional, explains the international health insurance services offered (corporate and personal), builds trust through experience/social proof, and lets visitors reach out via a contact form.
 
+**Core brand principle — peace of mind.** Per stakeholder input, what's actually being sold isn't a policy, it's peace of mind — the reassurance that health coverage is sorted no matter where you live or work. This should shape tone and imagery throughout: copy, hero visuals, and testimonials should reinforce reassurance and being taken care of, not just list plan features.
+
 ## 2. Goal type & rigor
 **Production.** This is a real, live site meant to be shared with actual prospective clients — it should look polished and function reliably, even though the scope (one page) is small.
 

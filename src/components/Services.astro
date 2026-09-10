@@ -1,33 +1,40 @@
 ---
-import { services } from '../content/services';
+import { services, type ServiceIcon } from '../content/services';
+
+// Icon registry: keyed by ServiceIcon. Add a new key here (and to the
+// ServiceIcon union in services.ts) when a service needs a bespoke icon —
+// otherwise it falls back to the "shield" icon below.
+const iconPaths: Record<ServiceIcon, string> = {
+  corporate:
+    '<rect x="4" y="3" width="10" height="18"></rect><rect x="14" y="8" width="6" height="13"></rect><path d="M7 7h1M7 11h1M7 15h1M10 7h1M10 11h1M10 15h1M16 12h1M16 16h1"></path>',
+  personal: '<circle cx="12" cy="8" r="3.2"></circle><path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"></path>',
+  shield: '<path d="M12 3l7 3v6c0 4.5-3 7.8-7 9-4-1.2-7-4.5-7-9V6l7-3z"></path><path d="M9 12l2 2 4-4"></path>',
+};
+
+const iconStyle: Record<ServiceIcon, string> = {
+  corporate: 'bg-ink text-surface',
+  personal: 'bg-mint text-mint-ink',
+  shield: 'bg-mint text-mint-ink',
+};
 ---
 
 <section id="services" class="mx-auto max-w-6xl px-8 py-20">
-  <h2 class="max-w-xl text-3xl md:text-4xl">Two ways to be covered globally</h2>
+  <h2 class="max-w-xl text-3xl md:text-4xl">Coverage built around how you live and work</h2>
 
-  <div class="mt-11 grid gap-7 md:grid-cols-2">
+  <div class="mt-11 grid gap-7 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
     {
       services.map((service) => (
         <div class="flex flex-col gap-4 rounded-xl border border-line bg-white p-10">
-          <div
-            class={
-              service.icon === 'corporate'
-                ? 'flex h-14 w-14 items-center justify-center rounded-2xl bg-ink text-surface'
-                : 'flex h-14 w-14 items-center justify-center rounded-2xl bg-mint text-mint-ink'
-            }
-          >
-            {service.icon === 'corporate' ? (
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <rect x="4" y="3" width="10" height="18" />
-                <rect x="14" y="8" width="6" height="13" />
-                <path d="M7 7h1M7 11h1M7 15h1M10 7h1M10 11h1M10 15h1M16 12h1M16 16h1" />
-              </svg>
-            ) : (
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <circle cx="12" cy="8" r="3.2" />
-                <path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" />
-              </svg>
-            )}
+          <div class={`flex h-14 w-14 items-center justify-center rounded-2xl ${iconStyle[service.icon] ?? iconStyle.shield}`}>
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              set:html={iconPaths[service.icon] ?? iconPaths.shield}
+            />
           </div>
           <h3 class="text-xl md:text-2xl">{service.title}</h3>
           <p class="text-ink-soft">{service.description}</p>
