@@ -3,9 +3,9 @@
 A single-page marketing/contact website for an independent insurance sales professional specializing in corporate and personal international health insurance policies (e.g. Bupa-style global health plans). The site introduces the professional, explains services, builds credibility, and lets prospects reach out via a contact form. Full design source of truth: `planning/engineering_design.md` and `planning/product_requirements.md`.
 
 ## Current Status
-**Phase:** v1 build — all sections scaffolded and verified locally; not yet deployed.
-**Last completed:** Full Astro site scaffolded (Nav, Hero, Services, About, Testimonials, Contact, Footer) in the "Modern Advisor" visual direction; `npm run build` succeeds with 0 vulnerabilities; dev server verified serving the page correctly at `http://localhost:4321` via Docker.
-**Next step:** Review the live dev server in a browser, then commit the scaffold; after that, deploy to Netlify and do an end-to-end test of the live contact form submission (Netlify Forms only actually captures submissions once deployed, not in local dev).
+**Phase:** Live on Netlify, sharing with client for feedback — polishing mobile responsiveness and pending real content.
+**Last completed:** Fixed mobile nav (hamburger menu) and a z-index bug (Hero content rendering above the sticky nav mid-scroll, fixed via `isolate` + `z-50`); worked around a Docker/Windows dev-server file-watching issue.
+**Next step:** Continue mobile responsiveness pass on other sections; get real service/bio/testimonial content from the client; set up the Forms notification email once ready for real leads.
 **Full history & detail:** see `project_status.md`
 
 - [x] Planning questions & rigor level (Production)
@@ -14,8 +14,9 @@ A single-page marketing/contact website for an independent insurance sales profe
 - [x] Visual direction chosen (see Key Design Decisions)
 - [x] Astro project scaffolded
 - [x] All v1 sections built (Hero, Services, About, Testimonials, Contact)
-- [ ] Netlify Forms wired up (markup done) and tested live
-- [ ] Deployed live on Netlify's default subdomain
+- [x] Deployed live on Netlify's default subdomain (GitHub-connected auto-deploy); form detection enabled
+- [ ] Netlify Forms notification email configured (deferred by user until after client feedback) and live submission tested end-to-end
+- [ ] Mobile responsiveness pass complete (nav fixed; keep checking other sections at small widths)
 
 ## Goals
 1. Ship a fast, polished, single-page site matching the clean, card-based style of the gayatech.dk reference (sticky nav, hero, services, about/credibility, social proof, contact).
@@ -91,6 +92,7 @@ MainaJP_site/
 **Code Quality:**
 - Keep components small and content (copy) separated from layout in `src/content/` so non-code edits (swapping testimonials, bio text) don't require touching component logic.
 - No premature abstraction — this is a one-page site; don't build for hypothetical future pages/features not in scope.
+- Any section with its own internal z-index layering (decorative background shapes, overlays) gets `isolate` on the section wrapper — this contains its stacking context so it can never compete with the sticky Nav's z-index. (A missing `isolate` on Hero previously caused hero content to render above the nav while scrolling past it.) Nav itself uses `z-50`, deliberately higher than any in-page content.
 
 ## Repository Etiquette
 - **Branching:** Solo developer — direct commits to `main` are fine for normal day-to-day changes (content edits, styling tweaks, small fixes). For large/risky refactors that could cause an outage or break the live site (e.g. swapping Netlify Forms for Vercel + a custom function, changing hosting providers, major structural changes), create a feature branch instead.
@@ -114,6 +116,8 @@ docker run --rm -p 4321:4321 -v "C:/Users/richa/OneDrive/Documents/Claude Worksp
 ```
 
 Dev server is then reachable at `http://localhost:4321` from the host browser.
+
+**Known gotcha:** Docker Desktop's bind mount doesn't reliably forward filesystem change events into the container on Windows, so Vite's default file watcher can silently miss edits (the dev server keeps serving stale content with no error). `astro.config.mjs` sets `vite.server.watch.usePolling: true` to work around this. If the dev server ever seems to be ignoring changes, restart the container rather than trusting hot-reload blindly.
 
 ## Reference Documents
 - `planning/product_requirements.md`

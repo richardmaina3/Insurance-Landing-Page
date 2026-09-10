@@ -20,13 +20,17 @@ Phase 1 (v1): a functional, shareable one-page site — Hero, Services (corporat
 - Hero redesigned as a full-width photo banner (tree-lined driveway image + indigo gradient overlay), replacing the earlier side-by-side portrait layout; professional headshot now lives in the About section only.
 - Services section generalized (auto-fit grid, icon registry with a fallback icon) so a 3rd/4th service is a content-only edit to `src/content/services.ts` — real content pending stakeholder discussion.
 - Real hero and headshot images wired in. **Hero image is a placeholder pending a licensed/final asset — do not deploy live as-is.**
+- Site deployed live on Netlify (GitHub-connected auto-deploy) and form detection enabled — this is the URL shared with the client for feedback.
+- Fixed mobile responsiveness: hamburger nav menu below `md`, and a z-index bug causing Hero content to render above the sticky nav mid-scroll (root cause: Hero's `z-10` content matched Nav's `z-10` and came later in the DOM — fixed with `isolate` on section wrappers + bumping Nav to `z-50`).
+- Fixed local dev server silently ignoring file edits (Docker-on-Windows bind mount file-watching issue) by enabling Vite polling in `astro.config.mjs`.
 
 ## Next up
 - Get the 3rd/4th service content from the client and add to `src/content/services.ts`.
-- Resolve licensing for the hero image (or swap in an owned/licensed replacement) before any live deploy.
+- Resolve licensing for the hero image (or swap in an owned/licensed replacement) before final launch.
 - Fill in real bio, credentials, and testimonials as they become available.
-- Wire up Netlify Forms notification in the Netlify dashboard and test end-to-end submission live (Netlify Forms only captures submissions once deployed, not in local dev).
-- Deploy and verify on Netlify's default subdomain; cross-browser/responsive check per engineering_design.md §11.
+- Set up the Netlify Forms notification email once ready to receive real leads (deferred by user until after client feedback).
+- Do a live end-to-end test of the contact form (submit → check Netlify Forms dashboard / Spam tab → confirm notification email once configured).
+- Collect client feedback on the shared Netlify URL.
 
 ## Deferred
 - Blog / articles / resources section.

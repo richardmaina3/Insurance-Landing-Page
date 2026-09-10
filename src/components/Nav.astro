@@ -4,14 +4,69 @@ interface Props {
 }
 
 const { name } = Astro.props;
+
+const links = [
+  { href: '#services', label: 'Services' },
+  { href: '#about', label: 'About' },
+  { href: '#testimonials', label: 'Testimonials' },
+  { href: '#contact', label: 'Contact' },
+];
 ---
 
-<header class="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-surface/95 px-8 py-5 backdrop-blur">
-  <a href="#top" class="font-display text-xl font-bold text-ink">{name}</a>
-  <nav class="flex gap-10 text-sm font-medium text-ink">
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#testimonials">Testimonials</a>
-    <a href="#contact">Contact</a>
+<header class="sticky top-0 z-50 border-b border-line bg-surface/95 backdrop-blur">
+  <div class="flex items-center justify-between px-8 py-5">
+    <a href="#top" class="font-display text-xl font-bold text-ink">{name}</a>
+
+    <nav class="hidden gap-10 text-sm font-medium text-ink md:flex">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <button
+      id="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label="Toggle menu"
+      class="flex h-9 w-9 items-center justify-center text-ink md:hidden"
+    >
+      <svg id="nav-icon-open" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 7h16M4 12h16M4 17h16"></path>
+      </svg>
+      <svg id="nav-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="hidden">
+        <path d="M6 6l12 12M18 6L6 18"></path>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-nav" class="hidden flex-col gap-1 border-t border-line px-8 py-4 text-sm font-medium text-ink md:hidden">
+    {
+      links.map((link) => (
+        <a href={link.href} class="rounded-lg px-2 py-2.5 hover:bg-surface-alt">
+          {link.label}
+        </a>
+      ))
+    }
   </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-nav');
+  const iconOpen = document.getElementById('nav-icon-open');
+  const iconClose = document.getElementById('nav-icon-close');
+
+  function setOpen(open: boolean) {
+    menu?.classList.toggle('hidden', !open);
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+    toggle?.setAttribute('aria-expanded', String(open));
+  }
+
+  toggle?.addEventListener('click', () => {
+    setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setOpen(false));
+  });
+</script>
