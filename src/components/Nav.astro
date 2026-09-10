@@ -1,0 +1,17 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<header class="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-surface/95 px-8 py-5 backdrop-blur">
+  <a href="#top" class="font-display text-xl font-bold text-ink">{name}</a>
+  <nav class="flex gap-10 text-sm font-medium text-ink">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>

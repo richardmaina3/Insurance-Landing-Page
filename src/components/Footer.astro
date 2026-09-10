@@ -1,0 +1,12 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<footer class="flex flex-col items-center justify-between gap-2 bg-surface-alt px-8 py-7 text-sm text-ink-soft md:flex-row">
+  <div>{name} — International Health Insurance Advisor</div>
+  <div>[email@example.com] · [+00 000 0000]</div>
+</footer>

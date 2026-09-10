@@ -1,0 +1,38 @@
+---
+import { services } from '../content/services';
+---
+
+<section id="services" class="mx-auto max-w-6xl px-8 py-20">
+  <h2 class="max-w-xl text-3xl md:text-4xl">Two ways to be covered globally</h2>
+
+  <div class="mt-11 grid gap-7 md:grid-cols-2">
+    {
+      services.map((service) => (
+        <div class="flex flex-col gap-4 rounded-xl border border-line bg-white p-10">
+          <div
+            class={
+              service.icon === 'corporate'
+                ? 'flex h-14 w-14 items-center justify-center rounded-2xl bg-ink text-surface'
+                : 'flex h-14 w-14 items-center justify-center rounded-2xl bg-mint text-mint-ink'
+            }
+          >
+            {service.icon === 'corporate' ? (
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="4" y="3" width="10" height="18" />
+                <rect x="14" y="8" width="6" height="13" />
+                <path d="M7 7h1M7 11h1M7 15h1M10 7h1M10 11h1M10 15h1M16 12h1M16 16h1" />
+              </svg>
+            ) : (
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="8" r="3.2" />
+                <path d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7" />
+              </svg>
+            )}
+          </div>
+          <h3 class="text-xl md:text-2xl">{service.title}</h3>
+          <p class="text-ink-soft">{service.description}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

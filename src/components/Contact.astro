@@ -1,0 +1,91 @@
+---
+---
+
+<section id="contact" class="relative overflow-hidden bg-ink px-8 py-24 text-surface">
+  <div class="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-white/5"></div>
+
+  <div class="relative mx-auto flex max-w-6xl flex-col gap-12 md:flex-row">
+    <div class="flex flex-1 flex-col gap-5">
+      <h2 class="text-3xl text-surface md:text-4xl">Let's talk about your coverage</h2>
+      <p class="max-w-sm leading-relaxed text-surface/80">
+        Reach out for a no-obligation conversation about corporate or personal international health coverage.
+      </p>
+      <div class="mt-2 flex flex-col gap-2 text-surface/90">
+        <div>[email@example.com]</div>
+        <div>[+00 000 0000]</div>
+      </div>
+    </div>
+
+    <div class="flex-1 rounded-2xl bg-white p-8">
+      <form
+        name="contact"
+        method="POST"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="flex flex-col gap-4"
+        id="contact-form"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden">
+          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        </p>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          required
+          class="rounded-lg border border-line px-4 py-3.5 text-ink placeholder:text-ink-soft"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          class="rounded-lg border border-line px-4 py-3.5 text-ink placeholder:text-ink-soft"
+        />
+        <textarea
+          name="message"
+          placeholder="Message"
+          rows="4"
+          required
+          class="resize-none rounded-lg border border-line px-4 py-3.5 text-ink placeholder:text-ink-soft"
+        ></textarea>
+        <button
+          type="submit"
+          class="inline-flex items-center justify-center gap-2 rounded-lg bg-mint px-7 py-3.5 font-semibold text-mint-ink"
+        >
+          Send message
+        </button>
+        <p id="contact-form-status" class="hidden text-sm" role="status"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('contact-form-status');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+
+    try {
+      await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data as unknown as Record<string, string>).toString(),
+      });
+      form.reset();
+      if (status) {
+        status.textContent = "Thanks — your message has been sent. I'll be in touch soon.";
+        status.classList.remove('hidden');
+      }
+    } catch {
+      if (status) {
+        status.textContent = 'Something went wrong sending your message — please try again or email directly.';
+        status.classList.remove('hidden');
+      }
+    }
+  });
+</script>

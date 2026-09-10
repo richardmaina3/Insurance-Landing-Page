@@ -1,0 +1,36 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<section id="about" class="bg-surface-alt px-8 py-24">
+  <div class="mx-auto flex max-w-6xl flex-col items-center gap-16 md:flex-row">
+    <div class="flex max-w-xl flex-1 flex-col gap-5">
+      <h2 class="text-3xl leading-tight md:text-4xl">
+        Guidance shaped by [X] years in international health insurance
+      </h2>
+      <p class="text-lg leading-relaxed text-ink-soft">
+        {name} has spent [X] years helping individuals, families, and businesses find the right global health
+        coverage — comparing providers, structuring plans, and standing beside clients through claims. [Add a
+        sentence on background, certifications, or areas of specialty.]
+      </p>
+      <div class="mt-3 flex gap-12">
+        <div>
+          <div class="font-display text-3xl font-bold">[X]+</div>
+          <div class="text-sm text-ink-soft">Years of experience</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl font-bold">[X]+</div>
+          <div class="text-sm text-ink-soft">Clients advised</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex h-[380px] w-full max-w-[320px] flex-1 items-center justify-center rounded-[20px] border border-line bg-white text-sm text-ink-soft">
+      {name}'s photo
+    </div>
+  </div>
+</section>

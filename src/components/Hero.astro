@@ -1,0 +1,39 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<section id="top" class="relative overflow-hidden px-8 pb-24 pt-20 md:pb-32 md:pt-24">
+  <div class="pointer-events-none absolute -right-40 -top-40 h-[640px] w-[640px] rounded-full bg-surface-alt"></div>
+  <div class="pointer-events-none absolute bottom-0 right-24 h-64 w-64 rotate-12 rounded-3xl bg-mint"></div>
+
+  <div class="relative mx-auto flex max-w-6xl flex-col items-center gap-12 md:flex-row">
+    <div class="flex flex-1 flex-col gap-6">
+      <span class="w-fit rounded-full bg-mint/20 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-mint-ink">
+        International Health Insurance Advisor
+      </span>
+      <h1 class="max-w-xl text-4xl leading-tight md:text-5xl">
+        Health coverage without borders — or confusion.
+      </h1>
+      <p class="max-w-lg text-lg leading-relaxed text-ink-soft">
+        Independent advice on corporate and personal international health plans, matched to how your life or business actually works.
+      </p>
+      <a
+        href="#contact"
+        class="mt-2 inline-flex w-fit items-center gap-2 rounded-lg bg-ink px-8 py-4 font-semibold text-surface"
+      >
+        Get in touch
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div class="flex h-[440px] w-full max-w-[360px] flex-1 items-center justify-center rounded-[20px] border border-line bg-white text-sm text-ink-soft shadow-[0_24px_48px_-24px_oklch(28%_0.09_265_/_0.25)]">
+      {name}'s photo
+    </div>
+  </div>
+</section>

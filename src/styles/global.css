@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: oklch(28% 0.09 265);
+  --color-ink-soft: oklch(45% 0.05 265);
+  --color-mint: oklch(78% 0.12 165);
+  --color-mint-ink: oklch(20% 0.06 165);
+  --color-surface: oklch(99% 0.005 260);
+  --color-surface-alt: oklch(95% 0.02 260);
+  --color-line: oklch(90% 0.02 260);
+
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "IBM Plex Sans", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-surface text-ink font-body antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-semibold tracking-tight;
+  }
+  a {
+    @apply text-ink hover:text-mint-ink transition-colors;
+  }
+}
